@@ -1,0 +1,1529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maui Pomare | Machine Learning Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --ink:#e8eef7;
+    --muted:#94a3b8;
+    --line:rgba(148,163,184,.22);
+    --surface:rgba(15,23,42,.72);
+    --accent:#60a5fa;
+    --accent-soft:rgba(96,165,250,.14);
+    --radius:16px;
+    --shadow:0 18px 50px rgba(0,0,0,.35);
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:"DM Sans",sans-serif;
+    background:
+        radial-gradient(ellipse 90% 55% at 50% -15%,rgba(37,99,235,.28) 0%,transparent 55%),
+        radial-gradient(ellipse 60% 40% at 100% 80%,rgba(14,165,233,.1) 0%,transparent 45%),
+        linear-gradient(165deg,#020617 0%,#0b1224 42%,#0f172a 72%,#020617 100%);
+    background-attachment:fixed;
+    color:var(--ink);
+    line-height:1.65;
+    min-height:100vh;
+}
+
+.site{
+    max-width:920px;
+    margin:0 auto;
+    padding:40px 20px 60px;
+}
+
+/* ——— Profile hero ——— */
+.profile{
+    position:relative;
+    overflow:hidden;
+    isolation:isolate;
+    background:
+        radial-gradient(ellipse 70% 60% at 50% 28%,rgba(51,80,140,.38) 0%,transparent 62%),
+        radial-gradient(ellipse 90% 80% at 50% 100%,rgba(2,6,23,.55) 0%,transparent 50%),
+        linear-gradient(165deg,rgba(22,36,66,.92) 0%,rgba(11,18,36,.94) 55%,rgba(8,14,28,.96) 100%);
+    backdrop-filter:blur(16px);
+    border-radius:24px;
+    box-shadow:var(--shadow);
+    padding:48px 40px 40px;
+    text-align:center;
+    margin-bottom:24px;
+    border:1px solid var(--line);
+}
+
+.profile::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    z-index:0;
+    pointer-events:none;
+    opacity:.35;
+    background-image:radial-gradient(rgba(148,163,184,.09) 1px,transparent 1px);
+    background-size:18px 18px;
+    mask-image:radial-gradient(ellipse 75% 70% at 50% 40%,#000 20%,transparent 75%);
+}
+
+.profile-nn{
+    position:absolute;
+    inset:0;
+    z-index:0;
+    pointer-events:none;
+    overflow:hidden;
+    opacity:.9;
+    -webkit-mask-image:radial-gradient(ellipse 42% 48% at 50% 32%,transparent 35%,#000 72%);
+    mask-image:radial-gradient(ellipse 42% 48% at 50% 32%,transparent 35%,#000 72%);
+}
+
+.profile-nn svg{
+    width:100%;
+    height:100%;
+    display:block;
+}
+
+.nn-link{
+    fill:none;
+    stroke:rgba(96,165,250,.2);
+    stroke-width:1.05;
+}
+
+.nn-link.active{
+    stroke:rgba(125,211,252,.6);
+    stroke-width:1.45;
+    filter:drop-shadow(0 0 3px rgba(56,189,248,.5));
+}
+
+.nn-node{
+    fill:rgba(147,197,253,.5);
+    stroke:rgba(191,219,254,.35);
+    stroke-width:1;
+}
+
+.nn-node.pulse{
+    fill:#bfdbfe;
+    filter:drop-shadow(0 0 7px rgba(96,165,250,.95));
+}
+
+.nn-signal{
+    fill:#e0f2fe;
+    filter:drop-shadow(0 0 5px rgba(125,211,252,1));
+}
+
+.profile-inner{
+    position:relative;
+    z-index:1;
+}
+
+.profile-photo-wrap{
+    display:inline-block;
+    margin-bottom:24px;
+    padding:4px;
+    border-radius:48px;
+    background:linear-gradient(145deg,rgba(96,165,250,.65),rgba(148,163,184,.12) 48%,rgba(37,99,235,.35));
+    box-shadow:
+        0 0 0 1px rgba(96,165,250,.2),
+        0 0 40px rgba(37,99,235,.35),
+        0 0 80px rgba(59,130,246,.18),
+        0 20px 40px rgba(0,0,0,.4);
+}
+
+.profile-photo{
+    display:block;
+    width:220px;
+    height:220px;
+    border-radius:44px;
+    object-fit:cover;
+    object-position:center 18%;
+    background:#0b1224;
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,.06);
+}
+
+.profile h1{
+    font-family:"Instrument Serif",Georgia,serif;
+    font-size:clamp(2.4rem,5vw,3.2rem);
+    font-weight:500;
+    letter-spacing:-0.02em;
+    margin:0 0 12px;
+    color:#ffffff;
+    text-shadow:
+        0 1px 0 rgba(255,255,255,.12),
+        0 2px 18px rgba(15,23,42,.65),
+        0 0 40px rgba(96,165,250,.18);
+}
+
+.profile .role{
+    font-size:1.05rem;
+    font-weight:600;
+    line-height:1.4;
+    color:var(--accent);
+    margin:0 0 12px;
+}
+
+.profile .tagline{
+    max-width:520px;
+    margin:0 auto 12px;
+    color:var(--muted);
+    font-size:.98rem;
+    line-height:1.55;
+}
+
+.profile-meta{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:8px 16px;
+    font-size:.9rem;
+    color:var(--muted);
+    margin:0 0 12px;
+}
+
+.profile-meta span{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+}
+
+.profile-actions{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:12px;
+    margin-top:24px;
+    padding-top:8px;
+}
+
+@media (prefers-reduced-motion:reduce){
+    .profile-nn{ opacity:.35; }
+}
+
+.btn{
+    appearance:none;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-family:inherit;
+    font-size:.92rem;
+    font-weight:600;
+    text-decoration:none;
+    padding:12px 22px;
+    border-radius:999px;
+    border:1px solid transparent;
+    cursor:pointer;
+    transition:background .25s ease,color .25s ease,border-color .25s ease,transform .2s ease,box-shadow .25s ease;
+}
+
+.btn:hover{
+    transform:translateY(-1px);
+}
+
+.btn-primary{
+    background:linear-gradient(135deg,#2563eb,#1d4ed8);
+    color:#fff;
+    box-shadow:0 10px 24px rgba(37,99,235,.35);
+}
+
+.btn-primary:hover{
+    box-shadow:0 14px 28px rgba(37,99,235,.45);
+}
+
+.btn-ghost{
+    background:rgba(148,163,184,.08);
+    color:var(--ink);
+    border-color:var(--line);
+}
+
+.btn-ghost:hover{
+    border-color:rgba(96,165,250,.45);
+    color:#fff;
+    background:rgba(96,165,250,.1);
+}
+
+.btn svg{
+    width:16px;
+    height:16px;
+    flex-shrink:0;
+}
+
+/* ——— Navigation ——— */
+.nav{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:10px;
+    margin-bottom:20px;
+    position:sticky;
+    top:12px;
+    z-index:20;
+}
+
+.nav-btn{
+    appearance:none;
+    border:1px solid var(--line);
+    background:rgba(15,23,42,.75);
+    backdrop-filter:blur(12px);
+    color:#cbd5e1;
+    font-family:inherit;
+    font-size:.92rem;
+    font-weight:600;
+    padding:12px 20px;
+    border-radius:999px;
+    cursor:pointer;
+    transition:background .25s ease,color .25s ease,border-color .25s ease,transform .2s ease,box-shadow .25s ease;
+}
+
+.nav-btn:hover{
+    border-color:rgba(96,165,250,.45);
+    color:#fff;
+    transform:translateY(-1px);
+}
+
+.nav-btn.active{
+    background:linear-gradient(135deg,#2563eb,#1d4ed8);
+    color:#fff;
+    border-color:transparent;
+    box-shadow:0 10px 24px rgba(37,99,235,.35);
+}
+
+.nav-btn:focus-visible{
+    outline:2px solid var(--accent);
+    outline-offset:3px;
+}
+
+/* ——— Panels ——— */
+.panels{
+    position:relative;
+    min-height:420px;
+}
+
+.panel{
+    display:none;
+    background:var(--surface);
+    backdrop-filter:blur(16px);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    padding:36px 40px;
+    border:1px solid var(--line);
+    animation:panelIn .4s ease;
+}
+
+.panel.active{
+    display:block;
+}
+
+@keyframes panelIn{
+    from{opacity:0;transform:translateY(10px);}
+    to{opacity:1;transform:translateY(0);}
+}
+
+.panel h2{
+    font-size:1.35rem;
+    font-weight:700;
+    margin-bottom:18px;
+    color:#f8fafc;
+    padding-bottom:12px;
+    border-bottom:2px solid rgba(96,165,250,.25);
+}
+
+.panel p{
+    color:#cbd5e1;
+}
+
+.panel ul{
+    margin:12px 0 0 20px;
+    color:#cbd5e1;
+}
+
+.panel li{
+    margin-bottom:8px;
+}
+
+.panel strong{
+    color:#f1f5f9;
+}
+
+.job{
+    margin-bottom:28px;
+}
+
+.job:last-child{
+    margin-bottom:0;
+}
+
+.job h3{
+    font-size:1.05rem;
+    margin-bottom:4px;
+    color:#f8fafc;
+}
+
+.job .meta{
+    color:var(--accent);
+    font-weight:600;
+    font-size:.92rem;
+}
+
+.skills{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+}
+
+.skill{
+    background:var(--accent-soft);
+    color:#bfdbfe;
+    border:1px solid rgba(96,165,250,.2);
+    padding:8px 14px;
+    border-radius:999px;
+    font-size:.88rem;
+    font-weight:600;
+}
+
+.skill-groups{
+    display:grid;
+    gap:22px;
+}
+
+.skill-group h3{
+    font-size:.95rem;
+    font-weight:700;
+    color:#f8fafc;
+    margin-bottom:12px;
+    letter-spacing:.02em;
+}
+
+.education-card{
+    background:rgba(96,165,250,.08);
+    border:1px solid rgba(96,165,250,.2);
+    border-radius:14px;
+    padding:24px;
+    display:flex;
+    gap:22px;
+    align-items:flex-start;
+}
+
+.education-logo{
+    flex-shrink:0;
+    width:72px;
+    height:72px;
+    border-radius:12px;
+    object-fit:cover;
+    box-shadow:0 8px 20px rgba(0,0,0,.35);
+    border:1px solid rgba(255,255,255,.12);
+}
+
+.education-body{
+    flex:1;
+    min-width:0;
+}
+
+.education-card h3{
+    margin-bottom:6px;
+    color:#f8fafc;
+}
+
+.education-card .place{
+    color:var(--accent);
+    font-weight:600;
+    margin-bottom:12px;
+}
+
+.education-card .highlight{
+    margin-top:14px;
+    padding:12px 14px;
+    border-radius:10px;
+    background:rgba(250,204,21,.08);
+    border:1px solid rgba(250,204,21,.22);
+    color:#fde68a;
+    font-size:.92rem;
+    font-weight:500;
+}
+
+@media(max-width:640px){
+    .education-card{
+        flex-direction:column;
+        align-items:center;
+        text-align:center;
+    }
+}
+
+.hire-grid{
+    display:grid;
+    gap:18px;
+}
+
+.hire-card{
+    background:rgba(96,165,250,.06);
+    border:1px solid rgba(96,165,250,.18);
+    border-radius:14px;
+    padding:22px;
+}
+
+.hire-card h3{
+    font-size:1.05rem;
+    color:#f8fafc;
+    margin-bottom:8px;
+}
+
+.hire-actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-top:22px;
+}
+
+.hire-note{
+    margin-top:18px;
+    font-size:.9rem;
+    color:var(--muted);
+}
+
+/* ——— Project carousel ——— */
+.carousel{
+    position:relative;
+    overflow:hidden;
+    border-radius:14px;
+    background:#0f172a;
+}
+
+.carousel-track{
+    display:flex;
+    transition:transform .55s cubic-bezier(.22,.61,.36,1);
+    will-change:transform;
+}
+
+.slide{
+    min-width:100%;
+    flex-shrink:0;
+}
+
+.slide-media{
+    aspect-ratio:16/9;
+    background:
+        linear-gradient(135deg,rgba(15,23,42,.35),rgba(30,64,175,.45)),
+        var(--slide-bg,#1e293b);
+    background-size:cover;
+    background-position:center;
+    display:flex;
+    align-items:flex-end;
+    position:relative;
+    overflow:hidden;
+}
+
+.slide-video{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    background:#0f172a;
+    z-index:0;
+}
+
+.slide-slideshow{
+    position:absolute;
+    inset:0;
+    z-index:0;
+    background:#0f172a;
+}
+
+.slide-slideshow img{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    opacity:0;
+    transition:opacity .7s ease;
+}
+
+.slide-slideshow img.active{
+    opacity:1;
+}
+
+.slide-media.has-video::after,
+.slide-media.has-slideshow::after{
+    background:linear-gradient(180deg,transparent 45%,rgba(15,23,42,.82) 100%);
+}
+
+.slide-media::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(180deg,transparent 35%,rgba(15,23,42,.88) 100%);
+    z-index:1;
+    pointer-events:none;
+}
+
+.slide-copy{
+    position:relative;
+    z-index:2;
+    padding:28px 32px;
+    color:#fff;
+    width:100%;
+}
+
+.slide-label{
+    display:inline-block;
+    font-size:.75rem;
+    font-weight:700;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    opacity:.75;
+    margin-bottom:8px;
+}
+
+.slide-copy h3{
+    font-size:1.35rem;
+    font-weight:700;
+    margin-bottom:8px;
+}
+
+.slide-copy p{
+    color:rgba(255,255,255,.85);
+    font-size:.95rem;
+    max-width:540px;
+}
+
+.slide-1 .slide-media,
+.slide:nth-child(4n+1) .slide-media{--slide-bg:linear-gradient(135deg,#0f172a,#1e3a8a 55%,#3b82f6);}
+.slide:nth-child(4n+2) .slide-media{--slide-bg:linear-gradient(135deg,#0f172a,#134e4a 55%,#14b8a6);}
+.slide:nth-child(4n+3) .slide-media{--slide-bg:linear-gradient(135deg,#0f172a,#4c1d95 55%,#a78bfa);}
+.slide:nth-child(4n+4) .slide-media{--slide-bg:linear-gradient(135deg,#0f172a,#7c2d12 55%,#f59e0b);}
+
+.projects-status{
+    margin-top:14px;
+    font-size:.85rem;
+    color:var(--muted);
+}
+
+.carousel-controls{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    margin-top:18px;
+}
+
+.carousel-arrows{
+    display:flex;
+    gap:8px;
+}
+
+.carousel-btn{
+    appearance:none;
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    border:1px solid var(--line);
+    background:rgba(15,23,42,.8);
+    color:var(--ink);
+    font-size:1.15rem;
+    cursor:pointer;
+    display:grid;
+    place-items:center;
+    transition:background .2s ease,border-color .2s ease,color .2s ease,transform .2s ease;
+}
+
+.carousel-btn:hover{
+    background:#2563eb;
+    color:#fff;
+    border-color:transparent;
+    transform:scale(1.04);
+}
+
+.carousel-btn:focus-visible{
+    outline:2px solid var(--accent);
+    outline-offset:2px;
+}
+
+.dots{
+    display:flex;
+    gap:8px;
+    align-items:center;
+}
+
+.dot{
+    appearance:none;
+    width:9px;
+    height:9px;
+    border-radius:50%;
+    border:none;
+    background:rgba(148,163,184,.4);
+    cursor:pointer;
+    padding:0;
+    transition:width .35s ease,background .35s ease,border-radius .35s ease;
+}
+
+.dot.active{
+    width:26px;
+    border-radius:999px;
+    background:var(--accent);
+}
+
+.project-hint{
+    margin-top:14px;
+    font-size:.85rem;
+    color:var(--muted);
+}
+
+.hire-note code{
+    color:#bfdbfe;
+    font-size:.85em;
+}
+
+.footer{
+    text-align:center;
+    margin-top:28px;
+    color:var(--muted);
+    font-size:.88rem;
+}
+
+@media(max-width:640px){
+    .site{padding:24px 14px 48px;}
+    .profile{padding:36px 22px 32px;}
+    .profile-photo{width:180px;height:180px;border-radius:36px;}
+    .profile-photo-wrap{border-radius:40px;}
+    .panel{padding:28px 22px;}
+    .slide-copy{padding:22px;}
+    .nav-btn{padding:10px 16px;font-size:.85rem;}
+}
+</style>
+</head>
+<body>
+
+<div class="site">
+
+    <section class="profile" aria-label="Profile">
+        <div class="profile-nn" aria-hidden="true">
+            <svg id="nnBrain" viewBox="0 0 900 560" preserveAspectRatio="xMidYMid slice">
+                <g id="nnLinks"></g>
+                <g id="nnNodes"></g>
+                <g id="nnSignals"></g>
+            </svg>
+        </div>
+        <div class="profile-inner">
+            <div class="profile-photo-wrap">
+                <img
+                    class="profile-photo"
+                    src="GITHUB/images/CV_portfolio.png"
+                    alt="Professional headshot of Maui Pomare"
+                    width="220"
+                    height="220"
+                >
+            </div>
+            <h1>Maui Pomare</h1>
+            <p class="role">Machine Learning Engineer · AI Engineer · Full Stack Developer</p>
+            <p class="tagline">
+                Building intelligent systems across New Zealand, Europe, and the United States —
+                from forecasting models to computer vision and AI agents.
+            </p>
+            <div class="profile-meta">
+                <span>New Zealand</span>
+                <span>·</span>
+                <span>Available Worldwide</span>
+                <span>·</span>
+                <span>Python · AI · ML</span>
+            </div>
+            <div class="profile-actions">
+                <button type="button" class="btn btn-primary" data-panel="hire">Hire Me</button>
+                <a
+                    class="btn btn-ghost"
+                    href="https://github.com/mauipomare2000"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    id="githubLink"
+                >
+                    <svg viewBox="0 0 16 16" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+                    GitHub
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <nav class="nav" aria-label="CV sections">
+        <button type="button" class="nav-btn active" data-panel="about">About</button>
+        <button type="button" class="nav-btn" data-panel="skills">Skills</button>
+        <button type="button" class="nav-btn" data-panel="experience">Experience</button>
+        <button type="button" class="nav-btn" data-panel="projects">Projects</button>
+        <button type="button" class="nav-btn" data-panel="education">Education</button>
+        <button type="button" class="nav-btn" data-panel="hire">Hire Me</button>
+    </nav>
+
+    <div class="panels">
+
+        <section id="about" class="panel active" aria-labelledby="about-title">
+            <h2 id="about-title">About</h2>
+            <p>
+                Passionate Machine Learning Engineer with over two years of professional experience designing intelligent AI systems, predictive models, computer vision solutions, and financial forecasting algorithms. Experienced delivering AI solutions across New Zealand, Europe, and the United States while collaborating with international clients.
+            </p>
+            <p style="margin-top:14px;">
+                Strong background in deep learning, Python development, AI agent architecture, quantitative finance, and full-stack software engineering. Dedicated to advancing artificial intelligence through innovative research, practical engineering, and scalable production systems.
+            </p>
+            <p style="margin-top:14px;">
+                Artificial Intelligence is more than my profession — it is my passion. I enjoy solving complex real-world problems through innovative AI solutions that create meaningful impact for businesses and communities.
+            </p>
+        </section>
+
+        <section id="skills" class="panel" aria-labelledby="skills-title" hidden>
+            <h2 id="skills-title">Skills &amp; Expertise</h2>
+            <div class="skill-groups">
+
+                <div class="skill-group">
+                    <h3>Machine Learning</h3>
+                    <div class="skills">
+                        <div class="skill">PyTorch</div>
+                        <div class="skill">TensorFlow</div>
+                        <div class="skill">Scikit-learn</div>
+                        <div class="skill">Neural Networks</div>
+                        <div class="skill">Deep Learning</div>
+                        <div class="skill">Reinforcement Learning</div>
+                        <div class="skill">Q-Learning</div>
+                        <div class="skill">Decision Trees</div>
+                        <div class="skill">Clustering</div>
+                        <div class="skill">Optuna</div>
+                        <div class="skill">Model Training</div>
+                    </div>
+                </div>
+
+                <div class="skill-group">
+                    <h3>Models</h3>
+                    <div class="skills">
+                        <div class="skill">XGBoost</div>
+                        <div class="skill">Logistic Regression</div>
+                        <div class="skill">Linear Regression</div>
+                        <div class="skill">Ridge / Lasso / ElasticNet</div>
+                        <div class="skill">SVM / SVR</div>
+                        <div class="skill">Random Forest</div>
+                        <div class="skill">Gradient Boosting</div>
+                        <div class="skill">K-Nearest Neighbors</div>
+                        <div class="skill">Naive Bayes</div>
+                        <div class="skill">Decision Tree Classifier / Regressor</div>
+                    </div>
+                </div>
+
+                <div class="skill-group">
+                    <h3>Signal &amp; Time Series</h3>
+                    <div class="skills">
+                        <div class="skill">Wavelets</div>
+                        <div class="skill">FFT</div>
+                        <div class="skill">Number Theoretic Transform (NTT)</div>
+                        <div class="skill">Holt-Winters</div>
+                        <div class="skill">Sine Wave Decomposition</div>
+                        <div class="skill">Signal Decomposition</div>
+                        <div class="skill">RSI</div>
+                        <div class="skill">Stochastic RSI</div>
+                        <div class="skill">EMA</div>
+                        <div class="skill">HMA</div>
+                        <div class="skill">ATR</div>
+                    </div>
+                </div>
+
+                <div class="skill-group">
+                    <h3>Trading</h3>
+                    <div class="skills">
+                        <div class="skill">Pine Script</div>
+                        <div class="skill">TradingView</div>
+                    </div>
+                </div>
+
+                <div class="skill-group">
+                    <h3>Computer Vision</h3>
+                    <div class="skills">
+                        <div class="skill">OpenCV</div>
+                        <div class="skill">YOLO Object Detection</div>
+                        <div class="skill">MediaPipe</div>
+                        <div class="skill">Image Classification</div>
+                        <div class="skill">Pose Estimation</div>
+                    </div>
+                </div>
+
+                <div class="skill-group">
+                    <h3>AI Systems</h3>
+                    <div class="skills">
+                        <div class="skill">LLM Applications</div>
+                        <div class="skill">AI Agents</div>
+                        <div class="skill">Flowise</div>
+                        <div class="skill">n8n</div>
+                        <div class="skill">RAG Systems</div>
+                        <div class="skill">Prompt Engineering</div>
+                        <div class="skill">Automation</div>
+                    </div>
+                </div>
+
+                <div class="skill-group">
+                    <h3>Backend / Data</h3>
+                    <div class="skills">
+                        <div class="skill">Python APIs</div>
+                        <div class="skill">SQL</div>
+                        <div class="skill">JSON</div>
+                        <div class="skill">Webhooks</div>
+                        <div class="skill">WebSockets</div>
+                        <div class="skill">Supabase</div>
+                        <div class="skill">Data Pipelines</div>
+                        <div class="skill">Virtual Private Servers</div>
+                        <div class="skill">Database Design</div>
+                    </div>
+                </div>
+
+                <div class="skill-group">
+                    <h3>Tools</h3>
+                    <div class="skills">
+                        <div class="skill">Git</div>
+                        <div class="skill">Docker</div>
+                        <div class="skill">Linux</div>
+                        <div class="skill">Google Colab</div>
+                        <div class="skill">Jupyter</div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="experience" class="panel" aria-labelledby="experience-title" hidden>
+            <h2 id="experience-title">Experience</h2>
+
+            <div class="job">
+                <h3>Machine Learning Engineer</h3>
+                <p class="meta">International Projects · New Zealand · Europe · USA</p>
+                <ul>
+                    <li>Designed machine learning systems for international businesses and research projects.</li>
+                    <li>Built forecasting models for financial markets and algorithmic trading strategies.</li>
+                    <li>Developed football prediction models using historical statistics and machine learning techniques.</li>
+                    <li>Created computer vision systems using YOLO object detection.</li>
+                    <li>Engineered AI agent workflows using Flowise and n8n.</li>
+                    <li>Designed SQL-backed AI applications and automated data pipelines.</li>
+                    <li>Produced advanced data visualizations using Matplotlib, Seaborn, and HiPlot.</li>
+                    <li>Developed full-stack web applications integrating machine learning models.</li>
+                </ul>
+            </div>
+
+            <div class="job">
+                <h3>Client Projects</h3>
+                <ul>
+                    <li><strong>Accenture</strong> — AI software development and machine learning consulting.</li>
+                    <li><strong>PRN Care (New York)</strong> — Predictive healthcare analytics, financial forecasting, trading algorithms, and football prediction models.</li>
+                    <li><strong>Treasure Jewelry (California)</strong> — AI-powered business software and automation solutions.</li>
+                    <li><strong>California</strong> — Programming and AI tutor mentoring students in Python and Machine Learning.</li>
+                    <li><strong>Queenstown, New Zealand</strong> — Software supporting charitable community initiatives.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="projects" class="panel" aria-labelledby="projects-title" hidden>
+            <h2 id="projects-title">Projects</h2>
+
+            <div class="carousel" aria-roledescription="carousel" aria-label="Featured projects">
+                <div class="carousel-track" id="carouselTrack"></div>
+            </div>
+
+            <div class="carousel-controls">
+                <div class="carousel-arrows">
+                    <button type="button" class="carousel-btn" id="prevSlide" aria-label="Previous project">‹</button>
+                    <button type="button" class="carousel-btn" id="nextSlide" aria-label="Next project">›</button>
+                </div>
+                <div class="dots" id="carouselDots" role="tablist" aria-label="Project slides"></div>
+            </div>
+            <p class="projects-status" id="projectsStatus">Loading projects…</p>
+        </section>
+
+        <section id="education" class="panel" aria-labelledby="education-title" hidden>
+            <h2 id="education-title">Education</h2>
+            <div class="education-card">
+                <img
+                    class="education-logo"
+                    src="GITHUB/images/qrc.png"
+                    alt="Queenstown Resort College (QRC) logo"
+                    width="72"
+                    height="72"
+                >
+                <div class="education-body">
+                    <h3>Machine Learning Development</h3>
+                    <p class="place">Queenstown Resort College · New Zealand</p>
+                    <p>
+                        Completed machine learning development studies at Queenstown Resort College,
+                        building a foundation in data engineering and model architecture across
+                        classification, regression, and supervised and unsupervised learning fundamentals.
+                    </p>
+                    <ul>
+                        <li>Data engineering &amp; model architecture</li>
+                        <li>Classification &amp; regression</li>
+                        <li>Supervised &amp; unsupervised learning</li>
+                    </ul>
+                    <p class="highlight">
+                        Graduated top of class — the first and only student to score 100% on all exams.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="hire" class="panel" aria-labelledby="hire-title" hidden>
+            <h2 id="hire-title">Hire Me</h2>
+            <p>
+                Available for machine learning, AI engineering, and full-stack projects —
+                from model development and automation to production-ready software.
+            </p>
+
+            <div class="hire-grid" style="margin-top:22px;">
+                <div class="hire-card">
+                    <h3>What I can help with</h3>
+                    <ul>
+                        <li>Machine learning &amp; deep learning systems</li>
+                        <li>Computer vision (YOLO) and forecasting models</li>
+                        <li>AI agents &amp; workflow automation (Flowise, n8n)</li>
+                        <li>Full-stack apps with ML integration</li>
+                    </ul>
+                </div>
+                <div class="hire-card">
+                    <h3>How to reach me</h3>
+                    <p>Based in New Zealand · open to remote work worldwide.</p>
+                    <p style="margin-top:10px;">Prefer email or GitHub for project inquiries.</p>
+                </div>
+            </div>
+
+            <div class="hire-actions">
+                <a class="btn btn-primary" href="mailto:your.email@example.com">Email Me</a>
+                <a
+                    class="btn btn-ghost"
+                    href="https://github.com/mauipomare2000"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <svg viewBox="0 0 16 16" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+                    View GitHub
+                </a>
+            </div>
+            <p class="hire-note">Update the email address when you are ready to share it publicly.</p>
+        </section>
+
+    </div>
+
+    <footer class="footer">
+        Machine Learning Engineer · Artificial Intelligence · Full Stack Developer
+    </footer>
+
+</div>
+
+<script>
+(function () {
+    const buttons = document.querySelectorAll(".nav-btn");
+    const panels = document.querySelectorAll(".panel");
+
+    function showPanel(id) {
+        panels.forEach(function (panel) {
+            const active = panel.id === id;
+            panel.classList.toggle("active", active);
+            if (active) {
+                panel.removeAttribute("hidden");
+            } else {
+                panel.setAttribute("hidden", "");
+            }
+        });
+        buttons.forEach(function (btn) {
+            btn.classList.toggle("active", btn.dataset.panel === id);
+        });
+        if (typeof syncActiveProjectMedia === "function") syncActiveProjectMedia();
+    }
+
+    buttons.forEach(function (btn) {
+        btn.addEventListener("click", function () {
+            showPanel(btn.dataset.panel);
+        });
+    });
+
+    document.querySelectorAll("[data-panel]").forEach(function (el) {
+        if (el.classList.contains("nav-btn")) return;
+        el.addEventListener("click", function () {
+            showPanel(el.dataset.panel);
+        });
+    });
+
+    /* Projects carousel — loads folders from GITHUB/images/projects.json + each project.json */
+    var track = document.getElementById("carouselTrack");
+    var dotsWrap = document.getElementById("carouselDots");
+    var prevBtn = document.getElementById("prevSlide");
+    var nextBtn = document.getElementById("nextSlide");
+    var statusEl = document.getElementById("projectsStatus");
+    var index = 0;
+    var timer = null;
+    var slideCount = 0;
+    var slideshowTimers = [];
+    var IMAGE_EXT = /\.(png|jpe?g|webp|gif|bmp|svg)$/i;
+    var VIDEO_EXT = /\.(mp4|webm|ogg|mov)$/i;
+    var IMAGES_BASE = "GITHUB/images/";
+
+    function mediaUrl(folder, file) {
+        return IMAGES_BASE + encodeURIComponent(folder).replace(/%2F/g, "/") + "/" + encodeURIComponent(file);
+    }
+
+    function padLabel(n) {
+        return n < 10 ? "0" + n : String(n);
+    }
+
+    function setStatus(msg) {
+        if (statusEl) statusEl.textContent = msg;
+    }
+
+    function stopSlideshows() {
+        slideshowTimers.forEach(function (id) { clearInterval(id); });
+        slideshowTimers = [];
+        document.querySelectorAll(".slide-video").forEach(function (v) {
+            v.pause();
+        });
+    }
+
+    function startSlideshow(root) {
+        var imgs = root.querySelectorAll("img");
+        if (imgs.length < 2) {
+            if (imgs[0]) imgs[0].classList.add("active");
+            return;
+        }
+        var i = 0;
+        imgs[0].classList.add("active");
+        var id = setInterval(function () {
+            imgs[i].classList.remove("active");
+            i = (i + 1) % imgs.length;
+            imgs[i].classList.add("active");
+        }, 2800);
+        slideshowTimers.push(id);
+    }
+
+    function syncActiveProjectMedia() {
+        stopSlideshows();
+        var projectsOpen = document.getElementById("projects") &&
+            document.getElementById("projects").classList.contains("active");
+        if (!projectsOpen || !track) return;
+        var slide = track.children[index];
+        if (!slide) return;
+
+        var video = slide.querySelector(".slide-video");
+        if (video) {
+            var playPromise = video.play();
+            if (playPromise && typeof playPromise.catch === "function") {
+                playPromise.catch(function () {});
+            }
+        }
+
+        var show = slide.querySelector(".slide-slideshow");
+        if (show) startSlideshow(show);
+    }
+
+    function goTo(i) {
+        if (!slideCount || !track) return;
+        index = (i + slideCount) % slideCount;
+        track.style.transform = "translateX(-" + index * 100 + "%)";
+        if (dotsWrap) {
+            Array.prototype.forEach.call(dotsWrap.children, function (dot, n) {
+                dot.classList.toggle("active", n === index);
+                dot.setAttribute("aria-selected", n === index ? "true" : "false");
+            });
+        }
+        syncActiveProjectMedia();
+    }
+
+    function next() { goTo(index + 1); }
+    function prev() { goTo(index - 1); }
+
+    function startAuto() {
+        stopAuto();
+        if (slideCount > 1) timer = setInterval(next, 8000);
+    }
+
+    function stopAuto() {
+        if (timer) clearInterval(timer);
+        timer = null;
+    }
+
+    function buildDots() {
+        if (!dotsWrap) return;
+        dotsWrap.innerHTML = "";
+        for (var i = 0; i < slideCount; i++) {
+            (function (n) {
+                var dot = document.createElement("button");
+                dot.type = "button";
+                dot.className = "dot" + (n === 0 ? " active" : "");
+                dot.setAttribute("aria-label", "Go to project " + (n + 1));
+                dot.setAttribute("aria-selected", n === 0 ? "true" : "false");
+                dot.addEventListener("click", function () {
+                    goTo(n);
+                    startAuto();
+                });
+                dotsWrap.appendChild(dot);
+            })(i);
+        }
+    }
+
+    function createSlide(folder, config, ordinal, total) {
+        var article = document.createElement("article");
+        article.className = "slide";
+        article.setAttribute("aria-label", "Project " + ordinal + " of " + total);
+        article.dataset.folder = folder;
+
+        var media = document.createElement("div");
+        media.className = "slide-media";
+
+        var images = (config.images || []).filter(function (name) {
+            return IMAGE_EXT.test(name) && name !== "project.json";
+        });
+        var videoName = config.video || null;
+        if (!videoName && config.media) {
+            var hit = config.media.find(function (m) { return VIDEO_EXT.test(m); });
+            if (hit) videoName = hit;
+        }
+
+        if (videoName && VIDEO_EXT.test(videoName)) {
+            media.classList.add("has-video");
+            var video = document.createElement("video");
+            video.className = "slide-video";
+            video.src = mediaUrl(folder, videoName);
+            video.muted = true;
+            video.loop = true;
+            video.playsInline = true;
+            video.controls = true;
+            video.preload = "metadata";
+            media.appendChild(video);
+        } else if (images.length) {
+            media.classList.add("has-slideshow");
+            var show = document.createElement("div");
+            show.className = "slide-slideshow";
+            images.forEach(function (name, imgIndex) {
+                var img = document.createElement("img");
+                img.src = mediaUrl(folder, name);
+                img.alt = (config.title || folder) + " screenshot " + (imgIndex + 1);
+                img.loading = imgIndex === 0 ? "eager" : "lazy";
+                if (imgIndex === 0) img.classList.add("active");
+                show.appendChild(img);
+            });
+            media.appendChild(show);
+        }
+
+        var copy = document.createElement("div");
+        copy.className = "slide-copy";
+        copy.innerHTML =
+            "<span class=\"slide-label\">Project " + padLabel(ordinal) + "</span>" +
+            "<h3></h3><p></p>";
+        copy.querySelector("h3").textContent = config.title || folder;
+        copy.querySelector("p").textContent = config.description || "";
+        media.appendChild(copy);
+        article.appendChild(media);
+        return article;
+    }
+
+    var PROJECTS_FALLBACK = {
+        projects: ["arb", "forcast", "project_1", "switch_signals"],
+        configs: {
+            arb: {
+                title: "Arbitrage Trading System",
+                description: "Live arbitrage trading workflow and market execution visuals.",
+                video: "20260714-2019-18.0660375.mp4",
+                images: ["image.png", "Screenshot 2026-03-05 145356.png"]
+            },
+            forcast: {
+                title: "Financial Forecasting",
+                description: "Forecasting financial data",
+                images: [
+                    "image.png",
+                    "Screenshot 2025-11-25 111142.png",
+                    "Screenshot 2025-11-28 155721.png",
+                    "Screenshot 2025-11-29 212906.png",
+                    "Screenshot 2025-12-01 180139.png",
+                    "Screenshot 2025-12-03 114254.png",
+                    "Screenshot 2025-12-07 211135.png",
+                    "Screenshot 2025-12-09 204119.png",
+                    "Screenshot 2025-12-10 232425.png",
+                    "Screenshot 2025-12-10 233515.png",
+                    "Screenshot 2025-12-11 011141.png",
+                    "Screenshot 2025-12-11 030641.png"
+                ]
+            },
+            project_1: {
+                title: "Trading Analytics",
+                description: "Charts, candlestick analysis, and strategy performance visuals.",
+                images: [
+                    "3d_candle.png",
+                    "returns_chart.png",
+                    "Screenshot 2025-11-11 133600.png",
+                    "Screenshot 2025-11-11 161648.png",
+                    "Screenshot 2025-11-13 043701.png",
+                    "Screenshot 2025-11-13 052414.png",
+                    "Screenshot 2025-11-13 230536.png",
+                    "Screenshot 2025-11-14 040702.png",
+                    "Screenshot 2025-11-14 042326.png",
+                    "Screenshot 2025-11-14 042725.png",
+                    "Screenshot 2025-11-14 052809.png",
+                    "Screenshot 2025-11-14 063021.png",
+                    "Screenshot 2025-11-22 144954.png"
+                ]
+            },
+            switch_signals: {
+                title: "Signal Switching & LLM Automation",
+                description: "LLM trading architecture and n8n automation for switching market signals.",
+                images: ["llm_arch.png", "LLM_trading.png", "n8n.png", "n8n_large.png"]
+            }
+        }
+    };
+
+    async function loadProjects() {
+        if (!track) return;
+        setStatus("Loading projects…");
+        track.innerHTML = "";
+
+        var loaded = [];
+
+        try {
+            var manifestRes = await fetch(IMAGES_BASE + "projects.json", { cache: "no-store" });
+            if (!manifestRes.ok) throw new Error("manifest fetch failed");
+            var manifest = await manifestRes.json();
+            var folders = manifest.projects || [];
+
+            for (var f = 0; f < folders.length; f++) {
+                var folder = folders[f];
+                try {
+                    var res = await fetch(IMAGES_BASE + encodeURIComponent(folder) + "/project.json", { cache: "no-store" });
+                    if (!res.ok) throw new Error("missing project.json");
+                    var config = await res.json();
+                    loaded.push({ folder: folder, config: config });
+                } catch (err) {
+                    if (PROJECTS_FALLBACK.configs[folder]) {
+                        loaded.push({ folder: folder, config: PROJECTS_FALLBACK.configs[folder] });
+                    } else {
+                        console.warn("Skip project folder:", folder, err);
+                    }
+                }
+            }
+        } catch (err) {
+            console.warn("Using fallback project configs:", err);
+            (PROJECTS_FALLBACK.projects || []).forEach(function (folder) {
+                if (PROJECTS_FALLBACK.configs[folder]) {
+                    loaded.push({ folder: folder, config: PROJECTS_FALLBACK.configs[folder] });
+                }
+            });
+        }
+
+        if (!loaded.length) {
+            setStatus("No projects found. Add folders under images/ with a project.json.");
+            return;
+        }
+
+        loaded.forEach(function (item, i) {
+            track.appendChild(createSlide(item.folder, item.config, i + 1, loaded.length));
+        });
+
+        slideCount = loaded.length;
+        index = 0;
+        buildDots();
+        goTo(0);
+        startAuto();
+        setStatus(loaded.length + " projects loaded. Edit each folder’s project.json for title & description.");
+    }
+
+    if (nextBtn) nextBtn.addEventListener("click", function () { next(); startAuto(); });
+    if (prevBtn) prevBtn.addEventListener("click", function () { prev(); startAuto(); });
+
+    var carousel = document.querySelector(".carousel");
+    if (carousel) {
+        carousel.addEventListener("mouseenter", stopAuto);
+        carousel.addEventListener("mouseleave", startAuto);
+    }
+
+    var startX = 0;
+    if (track) {
+        track.addEventListener("touchstart", function (e) {
+            startX = e.changedTouches[0].screenX;
+            stopAuto();
+        }, { passive: true });
+        track.addEventListener("touchend", function (e) {
+            var dx = e.changedTouches[0].screenX - startX;
+            if (Math.abs(dx) > 40) {
+                if (dx < 0) next(); else prev();
+            }
+            startAuto();
+        }, { passive: true });
+    }
+
+    loadProjects();
+
+    /* Neural-network brain backdrop */
+    (function initNeuralBrain() {
+        var svg = document.getElementById("nnBrain");
+        var linksG = document.getElementById("nnLinks");
+        var nodesG = document.getElementById("nnNodes");
+        var signalsG = document.getElementById("nnSignals");
+        if (!svg || !linksG || !nodesG || !signalsG) return;
+
+        var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        var W = 900;
+        var H = 560;
+        var cx = W / 2;
+        var cy = H * 0.42;
+
+        function inBrain(x, y) {
+            var nx = (x - cx) / 255;
+            var ny = (y - cy) / 175;
+            var hemi = Math.abs(nx) < 0.08 ? 0.82 : 1;
+            var ellipse = (nx * nx) / (0.95 * hemi) + (ny * ny) / 0.72;
+            var stem = (y > cy + 90) && Math.abs(x - cx) < 55 + (y - cy - 90) * 0.15;
+            var cleft = Math.abs(nx) < 0.05 && ny > -0.15 && ny < 0.55;
+            if (cleft) return ellipse < 0.55;
+            return ellipse < 1 || stem;
+        }
+
+        var nodes = [];
+        var attempts = 0;
+        while (nodes.length < 52 && attempts < 2500) {
+            attempts++;
+            var x = cx + (Math.random() - 0.5) * 540;
+            var y = cy + (Math.random() - 0.5) * 360;
+            if (!inBrain(x, y)) continue;
+            var ok = true;
+            for (var i = 0; i < nodes.length; i++) {
+                var dx = nodes[i].x - x;
+                var dy = nodes[i].y - y;
+                if (dx * dx + dy * dy < 28 * 28) { ok = false; break; }
+            }
+            if (ok) nodes.push({ x: x, y: y, r: 2.2 + Math.random() * 1.8, el: null });
+        }
+
+        /* Extra edge nodes for clearer brain silhouette */
+        for (var a = 0; a < Math.PI * 2; a += 0.28) {
+            var rx = 240 * (0.92 + 0.08 * Math.sin(a * 3));
+            var ry = 160 * (0.88 + 0.1 * Math.cos(a * 2));
+            var sx = cx + Math.cos(a) * rx * (Math.abs(Math.cos(a)) < 0.12 ? 0.75 : 1);
+            var sy = cy + Math.sin(a) * ry;
+            if (inBrain(sx, sy) || Math.abs(Math.sin(a)) < 0.95) {
+                var farOk = true;
+                for (var j = 0; j < nodes.length; j++) {
+                    var ddx = nodes[j].x - sx;
+                    var ddy = nodes[j].y - sy;
+                    if (ddx * ddx + ddy * ddy < 22 * 22) { farOk = false; break; }
+                }
+                if (farOk) nodes.push({ x: sx, y: sy, r: 2.4, el: null });
+            }
+        }
+
+        var links = [];
+        for (var i = 0; i < nodes.length; i++) {
+            var near = [];
+            for (var j = i + 1; j < nodes.length; j++) {
+                var dx = nodes[i].x - nodes[j].x;
+                var dy = nodes[i].y - nodes[j].y;
+                var dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < 95) near.push({ j: j, dist: dist });
+            }
+            near.sort(function (a, b) { return a.dist - b.dist; });
+            var maxLinks = near.length > 4 ? 3 : near.length;
+            for (var k = 0; k < maxLinks; k++) {
+                links.push({
+                    a: i,
+                    b: near[k].j,
+                    el: null,
+                    activeUntil: 0
+                });
+            }
+        }
+
+        links.forEach(function (link) {
+            var line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+            line.setAttribute("x1", nodes[link.a].x);
+            line.setAttribute("y1", nodes[link.a].y);
+            line.setAttribute("x2", nodes[link.b].x);
+            line.setAttribute("y2", nodes[link.b].y);
+            line.setAttribute("class", "nn-link");
+            linksG.appendChild(line);
+            link.el = line;
+        });
+
+        nodes.forEach(function (node) {
+            var circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+            circle.setAttribute("cx", node.x);
+            circle.setAttribute("cy", node.y);
+            circle.setAttribute("r", node.r);
+            circle.setAttribute("class", "nn-node");
+            nodesG.appendChild(circle);
+            node.el = circle;
+        });
+
+        if (reduceMotion) return;
+
+        var signals = [];
+        var maxSignals = 7;
+
+        function spawnSignal() {
+            if (!links.length || signals.length >= maxSignals) return;
+            var link = links[Math.floor(Math.random() * links.length)];
+            var from = nodes[link.a];
+            var to = nodes[link.b];
+            if (Math.random() < 0.5) {
+                from = nodes[link.b];
+                to = nodes[link.a];
+            }
+            var dot = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+            dot.setAttribute("r", 2.4);
+            dot.setAttribute("class", "nn-signal");
+            signalsG.appendChild(dot);
+            signals.push({
+                el: dot,
+                link: link,
+                from: from,
+                to: to,
+                t: 0,
+                speed: 0.008 + Math.random() * 0.01
+            });
+            from.el.classList.add("pulse");
+            link.el.classList.add("active");
+            link.activeUntil = performance.now() + 900;
+            setTimeout(function () { from.el.classList.remove("pulse"); }, 280);
+        }
+
+        var lastSpawn = 0;
+        function frame(now) {
+            if (now - lastSpawn > 420) {
+                spawnSignal();
+                if (Math.random() < 0.35) spawnSignal();
+                lastSpawn = now;
+            }
+
+            for (var s = signals.length - 1; s >= 0; s--) {
+                var sig = signals[s];
+                sig.t += sig.speed;
+                if (sig.t >= 1) {
+                    sig.to.el.classList.add("pulse");
+                    setTimeout((function (el) {
+                        return function () { el.classList.remove("pulse"); };
+                    })(sig.to.el), 260);
+                    sig.el.remove();
+                    signals.splice(s, 1);
+                    continue;
+                }
+                var x = sig.from.x + (sig.to.x - sig.from.x) * sig.t;
+                var y = sig.from.y + (sig.to.y - sig.from.y) * sig.t;
+                sig.el.setAttribute("cx", x);
+                sig.el.setAttribute("cy", y);
+            }
+
+            for (var L = 0; L < links.length; L++) {
+                if (links[L].activeUntil && now > links[L].activeUntil) {
+                    links[L].el.classList.remove("active");
+                    links[L].activeUntil = 0;
+                }
+            }
+
+            requestAnimationFrame(frame);
+        }
+
+        requestAnimationFrame(frame);
+    })();
+})();
+</script>
+
+</body>
+</html>
