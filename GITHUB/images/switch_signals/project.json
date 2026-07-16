@@ -1,10 +1,5 @@
 {
   "title": "Signal Switching & LLM Automation",
   "description": "LLM trading architecture and n8n automation for switching market signals.",
-  "images": [
-    "llm_arch.png",
-    "LLM_trading.png",
-    "n8n.png",
-    "n8n_large.png"
-  ]
+  "flag": "US"
 }

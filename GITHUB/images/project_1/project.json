@@ -1,19 +1,5 @@
 {
   "title": "Trading Analytics",
   "description": "Charts, candlestick analysis, and strategy performance visuals.",
-  "images": [
-    "3d_candle.png",
-    "returns_chart.png",
-    "Screenshot 2025-11-11 133600.png",
-    "Screenshot 2025-11-11 161648.png",
-    "Screenshot 2025-11-13 043701.png",
-    "Screenshot 2025-11-13 052414.png",
-    "Screenshot 2025-11-13 230536.png",
-    "Screenshot 2025-11-14 040702.png",
-    "Screenshot 2025-11-14 042326.png",
-    "Screenshot 2025-11-14 042725.png",
-    "Screenshot 2025-11-14 052809.png",
-    "Screenshot 2025-11-14 063021.png",
-    "Screenshot 2025-11-22 144954.png"
-  ]
+  "flag": "NZ"
 }

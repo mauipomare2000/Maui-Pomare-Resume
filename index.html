@@ -572,6 +572,13 @@ body{
     width:100%;
 }
 
+.slide-label-row{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:8px;
+}
+
 .slide-label{
     display:inline-block;
     font-size:.75rem;
@@ -579,7 +586,15 @@ body{
     letter-spacing:.08em;
     text-transform:uppercase;
     opacity:.75;
-    margin-bottom:8px;
+}
+
+.slide-flag{
+    width:28px;
+    height:20px;
+    object-fit:cover;
+    border-radius:3px;
+    box-shadow:0 2px 8px rgba(0,0,0,.35);
+    border:1px solid rgba(255,255,255,.25);
 }
 
 .slide-copy h3{
@@ -1162,7 +1177,69 @@ body{
         }
     }
 
-    function createSlide(folder, config, ordinal, total) {
+    function flagSrc(flag) {
+        if (!flag) return "";
+        var value = String(flag).trim();
+        if (/^https?:\/\//i.test(value) || IMAGE_EXT.test(value) || value.indexOf("/") !== -1) {
+            if (IMAGE_EXT.test(value) && value.indexOf("/") === -1 && value.indexOf("http") !== 0) {
+                return IMAGES_BASE + "flags/" + encodeURIComponent(value);
+            }
+            return value;
+        }
+        var code = value.toLowerCase();
+        return "https://flagcdn.com/w80/" + encodeURIComponent(code) + ".png";
+    }
+
+    function splitMedia(files) {
+        var list = (files || []).filter(function (name) {
+            return name && name !== "project.json" && name !== "media.json" && PathStem(name);
+        });
+        return {
+            videos: list.filter(function (n) { return VIDEO_EXT.test(n); }),
+            images: list.filter(function (n) { return IMAGE_EXT.test(n); })
+        };
+    }
+
+    function PathStem(name) {
+        var base = String(name).split(/[\\/]/).pop() || "";
+        var dot = base.lastIndexOf(".");
+        return dot > 0 ? base.slice(0, dot) : "";
+    }
+
+    async function listFolderMedia(folder) {
+        /* Prefer generated media.json / media-index (works on GitHub Pages) */
+        try {
+            var res = await fetch(IMAGES_BASE + encodeURIComponent(folder) + "/media.json", { cache: "no-store" });
+            if (res.ok) {
+                var data = await res.json();
+                if (Array.isArray(data.files)) return data.files;
+                if (Array.isArray(data)) return data;
+            }
+        } catch (e) {}
+
+        /* Fallback: parse directory listing HTML (local servers that allow it) */
+        try {
+            var dirRes = await fetch(IMAGES_BASE + encodeURIComponent(folder) + "/", { cache: "no-store" });
+            if (!dirRes.ok) return [];
+            var html = await dirRes.text();
+            var found = [];
+            var re = /href=["']([^"']+)["']/gi;
+            var match;
+            while ((match = re.exec(html))) {
+                var href = decodeURIComponent(match[1].split("?")[0]);
+                var file = href.split("/").pop();
+                if (!file || file === ".." || file === ".") continue;
+                if ((IMAGE_EXT.test(file) || VIDEO_EXT.test(file)) && PathStem(file)) {
+                    if (found.indexOf(file) === -1) found.push(file);
+                }
+            }
+            return found;
+        } catch (e) {
+            return [];
+        }
+    }
+
+    function createSlide(folder, config, files, ordinal, total) {
         var article = document.createElement("article");
         article.className = "slide";
         article.setAttribute("aria-label", "Project " + ordinal + " of " + total);
@@ -1171,16 +1248,11 @@ body{
         var media = document.createElement("div");
         media.className = "slide-media";
 
-        var images = (config.images || []).filter(function (name) {
-            return IMAGE_EXT.test(name) && name !== "project.json";
-        });
-        var videoName = config.video || null;
-        if (!videoName && config.media) {
-            var hit = config.media.find(function (m) { return VIDEO_EXT.test(m); });
-            if (hit) videoName = hit;
-        }
+        var split = splitMedia(files);
+        var videoName = split.videos[0] || null;
+        var images = split.images;
 
-        if (videoName && VIDEO_EXT.test(videoName)) {
+        if (videoName) {
             media.classList.add("has-video");
             var video = document.createElement("video");
             video.className = "slide-video";
@@ -1208,11 +1280,33 @@ body{
 
         var copy = document.createElement("div");
         copy.className = "slide-copy";
-        copy.innerHTML =
-            "<span class=\"slide-label\">Project " + padLabel(ordinal) + "</span>" +
-            "<h3></h3><p></p>";
-        copy.querySelector("h3").textContent = config.title || folder;
-        copy.querySelector("p").textContent = config.description || "";
+
+        var labelRow = document.createElement("div");
+        labelRow.className = "slide-label-row";
+
+        var label = document.createElement("span");
+        label.className = "slide-label";
+        label.textContent = "Project " + padLabel(ordinal);
+        labelRow.appendChild(label);
+
+        var flag = flagSrc(config.flag);
+        if (flag) {
+            var flagImg = document.createElement("img");
+            flagImg.className = "slide-flag";
+            flagImg.src = flag;
+            flagImg.alt = (config.flag || "") + " flag";
+            flagImg.loading = "lazy";
+            labelRow.appendChild(flagImg);
+        }
+
+        var title = document.createElement("h3");
+        title.textContent = config.title || folder;
+        var desc = document.createElement("p");
+        desc.textContent = config.description || "";
+
+        copy.appendChild(labelRow);
+        copy.appendChild(title);
+        copy.appendChild(desc);
         media.appendChild(copy);
         article.appendChild(media);
         return article;
@@ -1222,52 +1316,24 @@ body{
         projects: ["arb", "forcast", "project_1", "switch_signals"],
         configs: {
             arb: {
-                title: "Arbitrage Trading System",
-                description: "Live arbitrage trading workflow and market execution visuals.",
-                video: "20260714-2019-18.0660375.mp4",
-                images: ["image.png", "Screenshot 2026-03-05 145356.png"]
+                title: "Automated Trading System",
+                description: "Live Kalshi/Polymarket arbitrage trading workflow and market execution visuals.",
+                flag: "US"
             },
             forcast: {
                 title: "Financial Forecasting",
                 description: "Forecasting financial data",
-                images: [
-                    "image.png",
-                    "Screenshot 2025-11-25 111142.png",
-                    "Screenshot 2025-11-28 155721.png",
-                    "Screenshot 2025-11-29 212906.png",
-                    "Screenshot 2025-12-01 180139.png",
-                    "Screenshot 2025-12-03 114254.png",
-                    "Screenshot 2025-12-07 211135.png",
-                    "Screenshot 2025-12-09 204119.png",
-                    "Screenshot 2025-12-10 232425.png",
-                    "Screenshot 2025-12-10 233515.png",
-                    "Screenshot 2025-12-11 011141.png",
-                    "Screenshot 2025-12-11 030641.png"
-                ]
+                flag: "NZ"
             },
             project_1: {
                 title: "Trading Analytics",
                 description: "Charts, candlestick analysis, and strategy performance visuals.",
-                images: [
-                    "3d_candle.png",
-                    "returns_chart.png",
-                    "Screenshot 2025-11-11 133600.png",
-                    "Screenshot 2025-11-11 161648.png",
-                    "Screenshot 2025-11-13 043701.png",
-                    "Screenshot 2025-11-13 052414.png",
-                    "Screenshot 2025-11-13 230536.png",
-                    "Screenshot 2025-11-14 040702.png",
-                    "Screenshot 2025-11-14 042326.png",
-                    "Screenshot 2025-11-14 042725.png",
-                    "Screenshot 2025-11-14 052809.png",
-                    "Screenshot 2025-11-14 063021.png",
-                    "Screenshot 2025-11-22 144954.png"
-                ]
+                flag: "NZ"
             },
             switch_signals: {
                 title: "Signal Switching & LLM Automation",
                 description: "LLM trading architecture and n8n automation for switching market signals.",
-                images: ["llm_arch.png", "LLM_trading.png", "n8n.png", "n8n_large.png"]
+                flag: "US"
             }
         }
     };
@@ -1278,6 +1344,12 @@ body{
         track.innerHTML = "";
 
         var loaded = [];
+        var mediaIndex = {};
+
+        try {
+            var indexRes = await fetch(IMAGES_BASE + "media-index.json", { cache: "no-store" });
+            if (indexRes.ok) mediaIndex = await indexRes.json();
+        } catch (e) {}
 
         try {
             var manifestRes = await fetch(IMAGES_BASE + "projects.json", { cache: "no-store" });
@@ -1291,10 +1363,15 @@ body{
                     var res = await fetch(IMAGES_BASE + encodeURIComponent(folder) + "/project.json", { cache: "no-store" });
                     if (!res.ok) throw new Error("missing project.json");
                     var config = await res.json();
-                    loaded.push({ folder: folder, config: config });
+                    var files = mediaIndex[folder] || await listFolderMedia(folder);
+                    loaded.push({ folder: folder, config: config, files: files });
                 } catch (err) {
                     if (PROJECTS_FALLBACK.configs[folder]) {
-                        loaded.push({ folder: folder, config: PROJECTS_FALLBACK.configs[folder] });
+                        loaded.push({
+                            folder: folder,
+                            config: PROJECTS_FALLBACK.configs[folder],
+                            files: mediaIndex[folder] || []
+                        });
                     } else {
                         console.warn("Skip project folder:", folder, err);
                     }
@@ -1304,18 +1381,22 @@ body{
             console.warn("Using fallback project configs:", err);
             (PROJECTS_FALLBACK.projects || []).forEach(function (folder) {
                 if (PROJECTS_FALLBACK.configs[folder]) {
-                    loaded.push({ folder: folder, config: PROJECTS_FALLBACK.configs[folder] });
+                    loaded.push({
+                        folder: folder,
+                        config: PROJECTS_FALLBACK.configs[folder],
+                        files: mediaIndex[folder] || []
+                    });
                 }
             });
         }
 
         if (!loaded.length) {
-            setStatus("No projects found. Add folders under images/ with a project.json.");
+            setStatus("No projects found. Add a folder with project.json (title, description, flag).");
             return;
         }
 
         loaded.forEach(function (item, i) {
-            track.appendChild(createSlide(item.folder, item.config, i + 1, loaded.length));
+            track.appendChild(createSlide(item.folder, item.config, item.files, i + 1, loaded.length));
         });
 
         slideCount = loaded.length;
@@ -1323,7 +1404,7 @@ body{
         buildDots();
         goTo(0);
         startAuto();
-        setStatus(loaded.length + " projects loaded. Edit each folder’s project.json for title & description.");
+        setStatus(loaded.length + " projects loaded. project.json = title, description, flag. After adding media, run: python GITHUB/images/scan_media.py");
     }
 
     if (nextBtn) nextBtn.addEventListener("click", function () { next(); startAuto(); });
