@@ -435,8 +435,8 @@ body{
 
 .skills{
     display:flex;
-    flex-wrap:nowrap;
-    gap:12px;
+    flex-wrap:wrap;
+    gap:10px;
 }
 
 .skill{
@@ -461,110 +461,15 @@ body{
     border:1px solid var(--line);
     border-radius:14px;
     padding:16px;
-    overflow:hidden;
     min-width:0;
-}
-
-.skill-group-head{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:12px;
-    margin-bottom:14px;
 }
 
 .skill-group h3{
     font-size:.95rem;
     font-weight:700;
     color:#f8fafc;
-    margin:0;
+    margin:0 0 14px;
     letter-spacing:.02em;
-}
-
-.skill-navs{
-    display:flex;
-    gap:6px;
-    flex-shrink:0;
-}
-
-.skill-nav{
-    appearance:none;
-    width:32px;
-    height:32px;
-    border-radius:50%;
-    border:1px solid var(--line);
-    background:rgba(15,23,42,.75);
-    color:#e2e8f0;
-    font-size:1.1rem;
-    line-height:1;
-    cursor:pointer;
-    display:grid;
-    place-items:center;
-    transition:background .2s ease,border-color .2s ease,transform .2s ease,opacity .2s ease;
-}
-
-.skill-nav:hover:not(:disabled){
-    background:#2563eb;
-    border-color:transparent;
-    transform:scale(1.05);
-}
-
-.skill-nav:disabled{
-    opacity:.35;
-    cursor:default;
-}
-
-.skill-carousel{
-    overflow:hidden;
-    width:100%;
-    min-width:0;
-    position:relative;
-}
-
-.skill-viewport{
-    overflow:hidden;
-    width:100%;
-}
-
-.skill-track{
-    display:flex;
-    transition:transform .45s cubic-bezier(.22,.61,.36,1);
-    will-change:transform;
-}
-
-.skill-page{
-    flex:0 0 100%;
-    min-width:100%;
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    align-content:flex-start;
-    box-sizing:border-box;
-    padding:2px 2px 4px;
-}
-
-.skill-progress{
-    display:flex;
-    flex-wrap:wrap;
-    gap:6px;
-    justify-content:center;
-    margin-top:12px;
-    max-width:100%;
-    overflow:hidden;
-}
-
-.skill-progress span{
-    width:7px;
-    height:7px;
-    border-radius:999px;
-    background:rgba(148,163,184,.35);
-    transition:width .3s ease, background .3s ease;
-    flex-shrink:0;
-}
-
-.skill-progress span.active{
-    width:18px;
-    background:var(--accent);
 }
 
 .education-card{
@@ -693,6 +598,7 @@ body{
     object-fit:cover;
     background:#0f172a;
     z-index:0;
+    pointer-events:none;
 }
 
 .slide-slideshow{
@@ -745,13 +651,9 @@ body{
     margin-bottom:8px;
 }
 
-.slide-label{
-    display:inline-block;
-    font-size:.75rem;
-    font-weight:700;
-    letter-spacing:.08em;
-    text-transform:uppercase;
-    opacity:.75;
+.slide.is-link:focus-visible{
+    outline:2px solid var(--accent);
+    outline-offset:2px;
 }
 
 .slide-flag{
@@ -972,199 +874,111 @@ body{
             <div class="skill-groups">
 
                 <div class="skill-group">
-                    <div class="skill-group-head">
-                        <h3>Machine Learning</h3>
-                        <div class="skill-navs">
-                            <button type="button" class="skill-nav" data-dir="-1" aria-label="Previous Machine Learning skills">‹</button>
-                            <button type="button" class="skill-nav" data-dir="1" aria-label="Next Machine Learning skills">›</button>
-                        </div>
+                    <h3>Machine Learning</h3>
+                    <div class="skills">
+                        <div class="skill">PyTorch</div>
+                        <div class="skill">TensorFlow</div>
+                        <div class="skill">Scikit-learn</div>
+                        <div class="skill">Neural Networks</div>
+                        <div class="skill">Deep Learning</div>
+                        <div class="skill">Reinforcement Learning</div>
+                        <div class="skill">Q-Learning</div>
+                        <div class="skill">Decision Trees</div>
+                        <div class="skill">Clustering</div>
+                        <div class="skill">Optuna</div>
+                        <div class="skill">Model Training</div>
                     </div>
-                    <div class="skill-carousel">
-                        <div class="skill-viewport">
-                            <div class="skills">
-                                <div class="skill">PyTorch</div>
-                                <div class="skill">TensorFlow</div>
-                                <div class="skill">Scikit-learn</div>
-                                <div class="skill">Neural Networks</div>
-                                <div class="skill">Deep Learning</div>
-                                <div class="skill">Reinforcement Learning</div>
-                                <div class="skill">Q-Learning</div>
-                                <div class="skill">Decision Trees</div>
-                                <div class="skill">Clustering</div>
-                                <div class="skill">Optuna</div>
-                                <div class="skill">Model Training</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="skill-progress" aria-hidden="true"></div>
                 </div>
 
                 <div class="skill-group">
-                    <div class="skill-group-head">
-                        <h3>Models</h3>
-                        <div class="skill-navs">
-                            <button type="button" class="skill-nav" data-dir="-1" aria-label="Previous Models skills">‹</button>
-                            <button type="button" class="skill-nav" data-dir="1" aria-label="Next Models skills">›</button>
-                        </div>
+                    <h3>Models</h3>
+                    <div class="skills">
+                        <div class="skill">XGBoost</div>
+                        <div class="skill">Logistic Regression</div>
+                        <div class="skill">Linear Regression</div>
+                        <div class="skill">Ridge / Lasso / ElasticNet</div>
+                        <div class="skill">SVM / SVR</div>
+                        <div class="skill">Random Forest</div>
+                        <div class="skill">Gradient Boosting</div>
+                        <div class="skill">K-Nearest Neighbors</div>
+                        <div class="skill">Naive Bayes</div>
+                        <div class="skill">Decision Tree Classifier / Regressor</div>
                     </div>
-                    <div class="skill-carousel">
-                        <div class="skill-viewport">
-                            <div class="skills">
-                                <div class="skill">XGBoost</div>
-                                <div class="skill">Logistic Regression</div>
-                                <div class="skill">Linear Regression</div>
-                                <div class="skill">Ridge / Lasso / ElasticNet</div>
-                                <div class="skill">SVM / SVR</div>
-                                <div class="skill">Random Forest</div>
-                                <div class="skill">Gradient Boosting</div>
-                                <div class="skill">K-Nearest Neighbors</div>
-                                <div class="skill">Naive Bayes</div>
-                                <div class="skill">Decision Tree Classifier / Regressor</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="skill-progress" aria-hidden="true"></div>
                 </div>
 
                 <div class="skill-group">
-                    <div class="skill-group-head">
-                        <h3>Signal &amp; Time Series</h3>
-                        <div class="skill-navs">
-                            <button type="button" class="skill-nav" data-dir="-1" aria-label="Previous Signal skills">‹</button>
-                            <button type="button" class="skill-nav" data-dir="1" aria-label="Next Signal skills">›</button>
-                        </div>
+                    <h3>Signal &amp; Time Series</h3>
+                    <div class="skills">
+                        <div class="skill">Wavelets</div>
+                        <div class="skill">FFT</div>
+                        <div class="skill">Number Theoretic Transform (NTT)</div>
+                        <div class="skill">Holt-Winters</div>
+                        <div class="skill">Sine Wave Decomposition</div>
+                        <div class="skill">Signal Decomposition</div>
+                        <div class="skill">RSI</div>
+                        <div class="skill">Stochastic RSI</div>
+                        <div class="skill">EMA</div>
+                        <div class="skill">HMA</div>
+                        <div class="skill">ATR</div>
                     </div>
-                    <div class="skill-carousel">
-                        <div class="skill-viewport">
-                            <div class="skills">
-                                <div class="skill">Wavelets</div>
-                                <div class="skill">FFT</div>
-                                <div class="skill">Number Theoretic Transform (NTT)</div>
-                                <div class="skill">Holt-Winters</div>
-                                <div class="skill">Sine Wave Decomposition</div>
-                                <div class="skill">Signal Decomposition</div>
-                                <div class="skill">RSI</div>
-                                <div class="skill">Stochastic RSI</div>
-                                <div class="skill">EMA</div>
-                                <div class="skill">HMA</div>
-                                <div class="skill">ATR</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="skill-progress" aria-hidden="true"></div>
                 </div>
 
                 <div class="skill-group">
-                    <div class="skill-group-head">
-                        <h3>Trading</h3>
-                        <div class="skill-navs">
-                            <button type="button" class="skill-nav" data-dir="-1" aria-label="Previous Trading skills">‹</button>
-                            <button type="button" class="skill-nav" data-dir="1" aria-label="Next Trading skills">›</button>
-                        </div>
+                    <h3>Trading</h3>
+                    <div class="skills">
+                        <div class="skill">Pine Script</div>
+                        <div class="skill">TradingView</div>
                     </div>
-                    <div class="skill-carousel">
-                        <div class="skill-viewport">
-                            <div class="skills">
-                                <div class="skill">Pine Script</div>
-                                <div class="skill">TradingView</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="skill-progress" aria-hidden="true"></div>
                 </div>
 
                 <div class="skill-group">
-                    <div class="skill-group-head">
-                        <h3>Computer Vision</h3>
-                        <div class="skill-navs">
-                            <button type="button" class="skill-nav" data-dir="-1" aria-label="Previous Computer Vision skills">‹</button>
-                            <button type="button" class="skill-nav" data-dir="1" aria-label="Next Computer Vision skills">›</button>
-                        </div>
+                    <h3>Computer Vision</h3>
+                    <div class="skills">
+                        <div class="skill">OpenCV</div>
+                        <div class="skill">YOLO Object Detection</div>
+                        <div class="skill">MediaPipe</div>
+                        <div class="skill">Image Classification</div>
+                        <div class="skill">Pose Estimation</div>
                     </div>
-                    <div class="skill-carousel">
-                        <div class="skill-viewport">
-                            <div class="skills">
-                                <div class="skill">OpenCV</div>
-                                <div class="skill">YOLO Object Detection</div>
-                                <div class="skill">MediaPipe</div>
-                                <div class="skill">Image Classification</div>
-                                <div class="skill">Pose Estimation</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="skill-progress" aria-hidden="true"></div>
                 </div>
 
                 <div class="skill-group">
-                    <div class="skill-group-head">
-                        <h3>AI Systems</h3>
-                        <div class="skill-navs">
-                            <button type="button" class="skill-nav" data-dir="-1" aria-label="Previous AI Systems skills">‹</button>
-                            <button type="button" class="skill-nav" data-dir="1" aria-label="Next AI Systems skills">›</button>
-                        </div>
+                    <h3>AI Systems</h3>
+                    <div class="skills">
+                        <div class="skill">LLM Applications</div>
+                        <div class="skill">AI Agents</div>
+                        <div class="skill">Flowise</div>
+                        <div class="skill">n8n</div>
+                        <div class="skill">RAG Systems</div>
+                        <div class="skill">Prompt Engineering</div>
+                        <div class="skill">Automation</div>
                     </div>
-                    <div class="skill-carousel">
-                        <div class="skill-viewport">
-                            <div class="skills">
-                                <div class="skill">LLM Applications</div>
-                                <div class="skill">AI Agents</div>
-                                <div class="skill">Flowise</div>
-                                <div class="skill">n8n</div>
-                                <div class="skill">RAG Systems</div>
-                                <div class="skill">Prompt Engineering</div>
-                                <div class="skill">Automation</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="skill-progress" aria-hidden="true"></div>
                 </div>
 
                 <div class="skill-group">
-                    <div class="skill-group-head">
-                        <h3>Backend / Data</h3>
-                        <div class="skill-navs">
-                            <button type="button" class="skill-nav" data-dir="-1" aria-label="Previous Backend skills">‹</button>
-                            <button type="button" class="skill-nav" data-dir="1" aria-label="Next Backend skills">›</button>
-                        </div>
+                    <h3>Backend / Data</h3>
+                    <div class="skills">
+                        <div class="skill">Python APIs</div>
+                        <div class="skill">SQL</div>
+                        <div class="skill">JSON</div>
+                        <div class="skill">Webhooks</div>
+                        <div class="skill">WebSockets</div>
+                        <div class="skill">Supabase</div>
+                        <div class="skill">Data Pipelines</div>
+                        <div class="skill">Virtual Private Servers</div>
+                        <div class="skill">Database Design</div>
                     </div>
-                    <div class="skill-carousel">
-                        <div class="skill-viewport">
-                            <div class="skills">
-                                <div class="skill">Python APIs</div>
-                                <div class="skill">SQL</div>
-                                <div class="skill">JSON</div>
-                                <div class="skill">Webhooks</div>
-                                <div class="skill">WebSockets</div>
-                                <div class="skill">Supabase</div>
-                                <div class="skill">Data Pipelines</div>
-                                <div class="skill">Virtual Private Servers</div>
-                                <div class="skill">Database Design</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="skill-progress" aria-hidden="true"></div>
                 </div>
 
                 <div class="skill-group">
-                    <div class="skill-group-head">
-                        <h3>Tools</h3>
-                        <div class="skill-navs">
-                            <button type="button" class="skill-nav" data-dir="-1" aria-label="Previous Tools skills">‹</button>
-                            <button type="button" class="skill-nav" data-dir="1" aria-label="Next Tools skills">›</button>
-                        </div>
+                    <h3>Tools</h3>
+                    <div class="skills">
+                        <div class="skill">Git</div>
+                        <div class="skill">Docker</div>
+                        <div class="skill">Linux</div>
+                        <div class="skill">Google Colab</div>
+                        <div class="skill">Jupyter</div>
                     </div>
-                    <div class="skill-carousel">
-                        <div class="skill-viewport">
-                            <div class="skills">
-                                <div class="skill">Git</div>
-                                <div class="skill">Docker</div>
-                                <div class="skill">Linux</div>
-                                <div class="skill">Google Colab</div>
-                                <div class="skill">Jupyter</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="skill-progress" aria-hidden="true"></div>
                 </div>
 
             </div>
@@ -1313,7 +1127,6 @@ body{
             btn.classList.toggle("active", btn.dataset.panel === id);
         });
         if (typeof syncActiveProjectMedia === "function") syncActiveProjectMedia();
-        if (typeof setSkillCarouselsActive === "function") setSkillCarouselsActive(id === "skills");
     }
 
     buttons.forEach(function (btn) {
@@ -1345,10 +1158,6 @@ body{
 
     function mediaUrl(folder, file) {
         return IMAGES_BASE + encodeURIComponent(folder).replace(/%2F/g, "/") + "/" + encodeURIComponent(file);
-    }
-
-    function padLabel(n) {
-        return n < 10 ? "0" + n : String(n);
     }
 
     function setStatus(msg) {
@@ -1509,7 +1318,7 @@ body{
     function createSlide(folder, config, files, ordinal, total) {
         var article = document.createElement("article");
         article.className = "slide";
-        article.setAttribute("aria-label", "Project " + ordinal + " of " + total);
+        article.setAttribute("aria-label", (config.title || folder) + " (" + ordinal + " of " + total + ")");
         article.dataset.folder = folder;
 
         var media = document.createElement("div");
@@ -1527,7 +1336,10 @@ body{
             video.muted = true;
             video.loop = true;
             video.playsInline = true;
-            video.controls = true;
+            video.controls = false;
+            video.disablePictureInPicture = true;
+            video.setAttribute("disablepictureinpicture", "");
+            video.setAttribute("controlsList", "nodownload nofullscreen noremoteplayback");
             video.preload = "metadata";
             media.appendChild(video);
         } else if (images.length) {
@@ -1548,22 +1360,17 @@ body{
         var copy = document.createElement("div");
         copy.className = "slide-copy";
 
-        var labelRow = document.createElement("div");
-        labelRow.className = "slide-label-row";
-
-        var label = document.createElement("span");
-        label.className = "slide-label";
-        label.textContent = "Project " + padLabel(ordinal);
-        labelRow.appendChild(label);
-
         var flag = flagSrc(config.flag);
         if (flag) {
+            var labelRow = document.createElement("div");
+            labelRow.className = "slide-label-row";
             var flagImg = document.createElement("img");
             flagImg.className = "slide-flag";
             flagImg.src = flag;
             flagImg.alt = (config.flag || "") + " flag";
             flagImg.loading = "lazy";
             labelRow.appendChild(flagImg);
+            copy.appendChild(labelRow);
         }
 
         var title = document.createElement("h3");
@@ -1571,11 +1378,31 @@ body{
         var desc = document.createElement("p");
         desc.textContent = config.description || "";
 
-        copy.appendChild(labelRow);
         copy.appendChild(title);
         copy.appendChild(desc);
         media.appendChild(copy);
         article.appendChild(media);
+
+        var link = config.url || config.link || "";
+        if (link && !videoName) {
+            article.classList.add("is-link");
+            article.setAttribute("role", "link");
+            article.tabIndex = 0;
+            article.setAttribute("aria-label", (config.title || folder) + " — open project");
+            function openProject() {
+                window.open(link, "_blank", "noopener,noreferrer");
+            }
+            article.addEventListener("click", function () {
+                openProject();
+            });
+            article.addEventListener("keydown", function (e) {
+                if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    openProject();
+                }
+            });
+        }
+
         return article;
     }
 
@@ -1583,9 +1410,10 @@ body{
         projects: ["arb", "forcast", "project_1", "switch_signals"],
         configs: {
             arb: {
-                title: "Automated Trading System",
-                description: "Live Kalshi/Polymarket arbitrage trading workflow and market execution visuals.",
-                flag: "US"
+                title: "YOLO POSE ESTIMATION",
+                description: "YOLO Pose Estimation using OpenCV and Python.",
+                flag: "US",
+                url: "https://github.com/mauipomare2000/COMPUTER-VISION"
             },
             forcast: {
                 title: "Financial Forecasting",
@@ -1699,141 +1527,6 @@ body{
     }
 
     loadProjects();
-
-    /* Skill group carousels — page-based sliders */
-    var skillCarouselTimers = [];
-    var skillCarousels = [];
-
-    function chunkSkills(skills, size) {
-        var pages = [];
-        for (var i = 0; i < skills.length; i += size) {
-            pages.push(skills.slice(i, i + size));
-        }
-        return pages.length ? pages : [[]];
-    }
-
-    function renderSkillProgress(carousel) {
-        carousel.progress.innerHTML = "";
-        for (var i = 0; i < carousel.pageCount; i++) {
-            var dot = document.createElement("span");
-            if (i === carousel.index) dot.className = "active";
-            (function (pageIndex) {
-                dot.addEventListener("click", function () {
-                    goSkillPage(carousel, pageIndex);
-                    restartSkillCarousels();
-                });
-            })(i);
-            carousel.progress.appendChild(dot);
-        }
-    }
-
-    function updateSkillNav(carousel) {
-        var prev = carousel.group.querySelector('.skill-nav[data-dir="-1"]');
-        var next = carousel.group.querySelector('.skill-nav[data-dir="1"]');
-        if (carousel.pageCount <= 1) {
-            if (prev) prev.disabled = true;
-            if (next) next.disabled = true;
-            return;
-        }
-        if (prev) prev.disabled = false;
-        if (next) next.disabled = false;
-    }
-
-    function goSkillPage(carousel, page) {
-        if (!carousel.pageCount) return;
-        carousel.index = (page + carousel.pageCount) % carousel.pageCount;
-        carousel.track.style.transform = "translateX(-" + carousel.index * 100 + "%)";
-        Array.prototype.forEach.call(carousel.progress.children, function (dot, i) {
-            dot.classList.toggle("active", i === carousel.index);
-        });
-        updateSkillNav(carousel);
-    }
-
-    function buildSkillCarousel(group) {
-        var viewport = group.querySelector(".skill-viewport");
-        var progress = group.querySelector(".skill-progress");
-        if (!viewport || !progress) return null;
-
-        var oldSkills = Array.prototype.slice.call(viewport.querySelectorAll(".skill"));
-        if (!oldSkills.length) return null;
-
-        var track = document.createElement("div");
-        track.className = "skill-track";
-        var pages = chunkSkills(oldSkills, 4);
-
-        pages.forEach(function (pageSkills) {
-            var page = document.createElement("div");
-            page.className = "skill-page";
-            pageSkills.forEach(function (skill) {
-                page.appendChild(skill);
-            });
-            track.appendChild(page);
-        });
-
-        viewport.innerHTML = "";
-        viewport.appendChild(track);
-
-        var carousel = {
-            group: group,
-            track: track,
-            progress: progress,
-            index: 0,
-            pageCount: pages.length
-        };
-
-        renderSkillProgress(carousel);
-        updateSkillNav(carousel);
-
-        group.querySelectorAll(".skill-nav").forEach(function (btn) {
-            btn.addEventListener("click", function () {
-                var dir = Number(btn.getAttribute("data-dir") || "1");
-                goSkillPage(carousel, carousel.index + dir);
-                restartSkillCarousels();
-            });
-        });
-
-        return carousel;
-    }
-
-    function stopSkillCarousels() {
-        skillCarouselTimers.forEach(function (id) { clearInterval(id); });
-        skillCarouselTimers = [];
-    }
-
-    function startSkillCarousels() {
-        stopSkillCarousels();
-        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-        skillCarousels.forEach(function (carousel, index) {
-            if (carousel.pageCount <= 1) return;
-            var timer = setInterval(function () {
-                var skillsOpen = document.getElementById("skills") &&
-                    document.getElementById("skills").classList.contains("active");
-                if (!skillsOpen) return;
-                goSkillPage(carousel, carousel.index + 1);
-            }, 3600 + index * 400);
-            skillCarouselTimers.push(timer);
-        });
-    }
-
-    function restartSkillCarousels() {
-        if (document.getElementById("skills") &&
-            document.getElementById("skills").classList.contains("active")) {
-            startSkillCarousels();
-        }
-    }
-
-    function setSkillCarouselsActive(active) {
-        if (active) startSkillCarousels();
-        else stopSkillCarousels();
-    }
-
-    document.querySelectorAll(".skill-group").forEach(function (group) {
-        var carousel = buildSkillCarousel(group);
-        if (!carousel) return;
-        skillCarousels.push(carousel);
-        group.addEventListener("mouseenter", stopSkillCarousels);
-        group.addEventListener("mouseleave", restartSkillCarousels);
-    });
 
     /* Neural-network brain backdrop */
     (function initNeuralBrain() {
